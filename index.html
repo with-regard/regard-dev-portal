@@ -15,11 +15,18 @@
 
   <script type="text/x-handlebars" id="projects">
     <ul>
-    {{#each}}
-      <li>{{name}}</li>
-      
-    {{/each}}
+      {{#each itemController="Project"}}
+        <li>
+          {{#if isEditing}}
+            {{input value=bufferedName focus-out="doneEditing" insert-newline="doneEditing" escape-press="cancelEditing"}}
+          {{else}}
+            <label {{action "editProjectName"}}>{{name}}</label>
+            <button {{action "deleteProject"}}>&times;</button>
+          {{/if}}
+        </li>
+      {{/each}}
     </ul>
+
     <button {{action "createProject"}} >Create project</button>
   </script>
 
