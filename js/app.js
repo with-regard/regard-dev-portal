@@ -3,7 +3,7 @@
 var App = Ember.Application.create();
 
 App.ApplicationAdapter = DS.RESTAdapter.extend({
-  host: 'https://regard-website-api.azurewebsites.net',
+  host: 'http://website-api.withregard.io',
   namespace: 'v1'
 });
 
@@ -27,4 +27,17 @@ App.ProjectsRoute = Ember.Route.extend({
     console.log('finding all projects');
     return this.store.find('project');
   }
+});
+
+
+App.ProjectsController = Ember.ArrayController.extend({
+  actions: {
+    createProject: function() {
+        var project = this.store.createRecord('project', {
+          name: 'test project'
+        });
+      
+        project.save();
+      }
+    }
 });
