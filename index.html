@@ -25,7 +25,7 @@
     <ul>
     {{#each investigations}} 
       <li>
-        {{#link-to 'project' this}} 
+        {{#link-to 'investigation' this}} 
           {{name}}
         {{/link-to}}
       </li>
@@ -44,7 +44,7 @@
             <li>
               {{#link-to 'project' this}}            
                 {{name}}
-                  <span class="side-nav-actions" {{action "deleteProject"}}>delete</span> 
+                  <span class="side-nav-actions" {{action "deleteProject"}}>&times;</span> 
               {{/link-to}}
             </li>
           {{/each}}
