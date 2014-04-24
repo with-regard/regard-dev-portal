@@ -31,7 +31,7 @@
 
         <aside class="left-off-canvas-menu">
           <ul class="off-canvas-list">
-            <li><label>Projects</label></li>
+            <li><label>Projects<span class="right" {{action "createProject"}}>+</span></label></li>
             {{#each itemController="Project"}}
               <li>
                 {{#link-to 'project' this}}            
@@ -39,6 +39,8 @@
                   <span class="right" {{action "deleteProject"}}>&times;</span> 
                 {{/link-to}}
               </li>
+            {{else}}
+              You don't have any projects
             {{/each}}
           </ul>
         </aside>
@@ -59,7 +61,9 @@
         {{#link-to 'investigation' this}}            
           {{name}}
         {{/link-to}}
-      </li>
+      </li>  
+    {{else}}
+      You haven't created any investigations
     {{/each}}
     </ul>
   </script>
