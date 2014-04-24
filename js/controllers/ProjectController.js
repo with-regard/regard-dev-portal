@@ -1,46 +1,3 @@
-/*global Todos, Ember, DS */
-'use strict';
-
-var App = Ember.Application.create();
-
-App.ApplicationAdapter = DS.RESTAdapter.extend({
-  host: 'http://website-api.withregard.io',
-  namespace: 'v1'
-});
-
-App.ApplicationSerializer = DS.RESTSerializer.extend({
-  primaryKey: '_id'
-});
-
-App.Project = DS.Model.extend({
-  name: DS.attr('string')
-});
-
-App.Router.map(function () {
-  // put your routes here
-  this.resource('projects', {path: '/'}, function() {
-      this.resource('project', {path: ':project_id' });
-  });
-});
-
-App.ProjectsRoute = Ember.Route.extend({
-  model: function () {
-    return this.store.find('project');
-  }
-});
-
-App.ProjectsController = Ember.ArrayController.extend({
-  actions: {
-    createProject: function () {
-      var project = this.store.createRecord('project', {
-        name: 'New project'
-      });
-
-      project.save();
-    }
-  }
-});
-
 App.ProjectController = Ember.ObjectController.extend({
   isEditing: false,
 
@@ -79,14 +36,14 @@ App.ProjectController = Ember.ObjectController.extend({
       this.set('bufferedName', this.get('name'));
       this.set('isEditing', false);
     },
-    
+
     deleteProject: function () {
       this.deleteProject();
     },
   },
-  
+
   deleteProject: function () {
-      var project = this.get('model');
-      project.destroyRecord();
-    },
+    var project = this.get('model');
+    project.destroyRecord();
+  },
 });
