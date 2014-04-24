@@ -13,7 +13,11 @@
   </script>
   
   <script type="text/x-handlebars" data-template-name="project" >
-    {{name}}
+    {{#if isEditing}}
+      {{input value=bufferedName focus-out="doneEditing" insert-newline="doneEditing" escape-press="cancelEditing"}}
+    {{else}}
+      <span {{action "editProjectName"}}>{{name}}</span>
+    {{/if}}
   </script>
 
   <script type="text/x-handlebars" data-template-name="projects">
@@ -56,6 +60,7 @@
   
   <script type="text/x-handlebars" id="investigations">
     <ul class="side-nav">
+      <li class="heading">Investigations</li>
     {{#each investigations}}
       <li>
         {{#link-to 'investigation' this}}            
