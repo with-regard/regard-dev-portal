@@ -13,6 +13,17 @@
       {{outlet}}
     </div>
   </script>
+  
+  <script type="text/x-handlebars" id="project" >
+    {{#if isEditing}}
+      {{input value=bufferedName focus-out="doneEditing" insert-newline="doneEditing" escape-press="cancelEditing"}}
+    {{else}}
+      <h2 {{action "editProjectName"}}>{{name}}</h2>
+    {{/if}}
+    
+    <h2>Description:</h2>
+    {{description}}
+  </script>
 
   <script type="text/x-handlebars" id="projects">
     <div class="medium-3 columns">
@@ -23,20 +34,17 @@
          </li>
           {{#each itemController="Project"}}
             <li>
-              {{#if isEditing}}
-                {{input value=bufferedName focus-out="doneEditing" insert-newline="doneEditing" escape-press="cancelEditing"}}
-              {{else}}
-                <a href="#">{{name}}
-                  <span class="side-nav-actions">
-                      <span {{action "editProjectName"}}>edit</span>
-                      <span {{action "deleteProject"}}>delete</span> 
-                  </span>
-                </a>
-              {{/if}}
+              {{#link-to 'project' this}}            
+                {{name}}
+                  <span class="side-nav-actions" {{action "deleteProject"}}>delete</span> 
+              {{/link-to}}
             </li>
           {{/each}}
         </ul>
       </nav>
+    </div>
+    <div class="medium-9 columns">
+      {{outlet}}
     </div>
   </script>
 

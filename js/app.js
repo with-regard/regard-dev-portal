@@ -18,8 +18,8 @@ App.Project = DS.Model.extend({
 
 App.Router.map(function () {
   // put your routes here
-  this.route('projects', {
-    path: '/'
+  this.resource('projects', {path: '/'}, function() {
+      this.resource('project', {path: ':project_id' });
   });
 });
 
