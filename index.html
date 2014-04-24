@@ -14,17 +14,26 @@
     </div>
   </script>
   
-  <script type="text/x-handlebars" id="project" >
+  <script type="text/x-handlebars" data-template-name="project" >
     {{#if isEditing}}
       {{input value=bufferedName focus-out="doneEditing" insert-newline="doneEditing" escape-press="cancelEditing"}}
     {{else}}
       <h2 {{action "editProjectName"}}>{{name}}</h2>
     {{/if}}
     
-    {{outlet}}
+   
+    <ul>
+    {{#each investigations}} 
+      <li>
+        {{#link-to 'project' this}} 
+          {{name}}
+        {{/link-to}}
+      </li>
+    {{/each}}
+    </ul>
   </script>
 
-  <script type="text/x-handlebars" id="projects">
+  <script type="text/x-handlebars" data-template-name="projects">
     <div class="medium-3 columns">
       <nav>
        <ul class="side-nav">
@@ -55,11 +64,16 @@
     </ul>
   </script>
   
+  <script type="text/x-handlebars" id="investigation">
+    {{name}}
+  </script>
+  
   <script src="js/libs/jquery-1.10.2.js"></script>
   <script src="js/libs/handlebars-1.1.2.js"></script>
   <script src="js/libs/ember-1.5.0.js"></script>
   <script src="js/libs/ember-data.js"></script>
   
+  <script src="js/mixins/NestedRecordsMixin.js"></script>
   <script src="js/app.js"></script>
   <script src="js/router.js"></script>
   <script src="js/controllers/ProjectController.js"></script>
