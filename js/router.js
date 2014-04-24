@@ -1,7 +1,8 @@
 App.Router.map(function () {
-  this.resource('projects', {path: '/'});
-  this.resource('project', {path: '/project/:project_id'});
-  this.resource('investigation', {path: '/project/:project_id/:investigation_id'})
+  this.resource('projects', {path: '/'}, function(){
+    this.resource('project', {path: '/project/:project_id'});
+    this.resource('investigation', {path: '/project/:project_id/:investigation_id'})  
+  });
 });
 
 App.ProjectsRoute = Ember.Route.extend({
