@@ -14,10 +14,15 @@ App.ProjectsRoute = Ember.Route.extend({
 
 App.ProjectRoute = Ember.Route.extend({
   model: function(params) {
-    var result = this.store.find('project', params.project_id);
-    result.then(function(res){
-      console.log(res);
+    return this.store.find('project', params.project_id);    
+  },
+  renderTemplate: function() {
+    this.render('investigations', { 
+      outlet: 'main' 
+    });
+    
+    this.render({
+      outlet: 'title'
     })
-    return result;
   }
 });
